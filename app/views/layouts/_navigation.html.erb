@@ -1,0 +1,19 @@
+<!--TODO Добавить реальные ссылки-->
+
+<ul class="nav bg-danger position-relative">
+  <li class="nav-item">
+    <%= link_to "Главная", root_path, class: "nav-link h3 text-black" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Тесты", tests_path, class: "nav-link h3 text-black" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Прогресс", '#', class: "nav-link h3 text-black" %>
+  </li>
+
+  <% if user_signed_in? %>
+    <li class="nav-item position-absolute top-0 end-0">
+      <%= link_to "Профиль", edit_user_registration_path, class: "nav-link h3 text-black" %>
+    </li>
+  <% end %>
+</ul>
