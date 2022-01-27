@@ -9,7 +9,7 @@
         <div class="card-body">
           <h4 class="card-title text-center"><%= test.title %></h4>
           <p class="card-text"><%= test.description %></p>
-          <button class="btn btn-danger text-black">Пройти тест</button>
+          <%= link_to "Пройти тест", test_start_path(test), class: "btn btn-danger text-black" %>
         </div>
       </div>
     </div>

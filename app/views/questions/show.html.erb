@@ -1,0 +1,19 @@
+<div class="row mt-4">
+  <div class="col"></div>
+  <div class="col-6">
+    <div class="text-center mt-4">
+      <h3><%= @question.text %></h3>
+    </div>
+    <%= form_with(url: question_answer_path) do |f| %>
+      <% @question.answers.each_with_index do |answer, index| %>
+        <div class="form-check mt-4">
+          <%= f.radio_button :answer, index, class: "form-check-input" %>
+          <%= f.label answer.id, answer.text, class: "form-check-label" %>
+        </div>
+      <% end %>
+
+      <%= f.submit "Далее", class: "btn btn-danger text-black mt-4" %>
+    <% end %>
+  </div>
+  <div class="col"></div>
+</div>

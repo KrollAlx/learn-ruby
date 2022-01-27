@@ -12,7 +12,13 @@
 # answer.question = question
 # question.test = test
 
-Test.create(title: "Second test!!", description: "Its my description")
-Test.create(title: "Third test!!", description: "Its my description")
-Test.create(title: "fourth test!!", description: "Its my description")
-Test.create(title: "fifth test!!", description: "Its my description")
+# test = Test.create(title: "Тест на знание основ Ruby", description: "Здесь вы можете пройти тест с уровнем «Начальный» на тему Ruby")
+test = Test.find_by(id: 6)
+
+Question.create!(text: "В каком варианте вы получите число без пропуска строки от пользователя?", right_answer: 0, test: test)
+question = Question.last
+question.answers.create(text: "num = gets.chomp()")
+question.answers.create(text: "num = gets.to_i")
+question.answers.create(text: "num = gets.chomp().to_i")
+question.answers.create(text: "num = chomp().to_i")
+question.answers.create(text: "num = gets")
