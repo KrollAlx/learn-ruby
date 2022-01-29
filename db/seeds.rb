@@ -15,10 +15,19 @@
 # test = Test.create(title: "Тест на знание основ Ruby", description: "Здесь вы можете пройти тест с уровнем «Начальный» на тему Ruby")
 test = Test.find_by(id: 6)
 
-Question.create!(text: "В каком варианте вы получите число без пропуска строки от пользователя?", right_answer: 0, test: test)
+Question.create!(text: "Укажите класс ядра Ruby для которого определен метод #each", right_answer: 5, test: test)
 question = Question.last
-question.answers.create(text: "num = gets.chomp()")
-question.answers.create(text: "num = gets.to_i")
-question.answers.create(text: "num = gets.chomp().to_i")
-question.answers.create(text: "num = chomp().to_i")
-question.answers.create(text: "num = gets")
+question.answers.create(text: "Interger")
+question.answers.create(text: "IO")
+question.answers.create(text: "Range")
+question.answers.create(text: "String")
+question.answers.create(text: "Hash")
+question.answers.create(text: "Array")
+
+Question.create!(text: "Какой метод должен существовать для объекта, чтобы использовать этот объект в качестве коллекции в цикле for-in?", right_answer: 5, test: test)
+question = Question.last
+question.answers.create(text: "#to_a")
+question.answers.create(text: "#size")
+question.answers.create(text: "#each")
+question.answers.create(text: "#initialize")
+question.answers.create(text: "#include?")

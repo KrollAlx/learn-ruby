@@ -12,8 +12,10 @@
         </div>
       <% end %>
 
-      <%= f.submit "Далее", class: "btn btn-danger text-black mt-4" %>
+      <%= f.submit "Ответить", class: "btn btn-danger text-black mt-4" %>
     <% end %>
   </div>
-  <div class="col"></div>
+  <div class="col text-center">
+    <h4 class="mt-4">Вопрос <%= @current_question_index %> / <%= @count_questions %></h4>
+  </div>
 </div>
