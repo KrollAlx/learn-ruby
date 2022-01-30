@@ -14,5 +14,7 @@ class TestsController < ApplicationController
   def result
     @right_answers_count = TestsService.right_answers_count
     @count_questions = TestsService.count_questions
+    @results = TestsService.results
+    @questions = TestsService.questions
   end
 end

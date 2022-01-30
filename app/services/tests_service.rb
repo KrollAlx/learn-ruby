@@ -1,6 +1,6 @@
 class TestsService
   class << self
-    attr_reader :count_questions, :right_answers_count, :test
+    attr_reader :count_questions, :right_answers_count, :test, :results, :questions
 
     def start_test(test)
       @test = test
@@ -8,11 +8,19 @@ class TestsService
       @count_questions = @questions.size
       @current_question_index = 0
       @right_answers_count = 0
+      @results = []
     end
 
     def answer(answer)
       question = @questions[@current_question_index]
-      @right_answers_count += 1 if question.right_answer == answer
+
+      if question.right_answer == answer
+        @right_answers_count += 1
+        @results.push({ answer: answer, result: 'правильный' })
+      else
+        @results.push({ answer: answer, result: 'неправильный' })
+      end
+
       @current_question_index += 1
     end
 
@@ -26,9 +34,6 @@ class TestsService
 
     def current_question_index
       @current_question_index + 1
-    end
-
-    def test_results
     end
   end
 end
