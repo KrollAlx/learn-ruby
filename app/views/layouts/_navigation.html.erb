@@ -6,7 +6,7 @@
     <%= link_to "Тесты", tests_path, class: "nav-link h3 text-black" %>
   </li>
   <li class="nav-item">
-    <%= link_to "Прогресс", '#', class: "nav-link h3 text-black" %>
+    <%= link_to "Прогресс", progress_show_path, class: "nav-link h3 text-black" %>
   </li>
 
   <% if user_signed_in? %>

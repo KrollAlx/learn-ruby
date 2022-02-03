@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
     TestsService.answer(params[:answer].to_i)
 
     if TestsService.test_completed?
-      CompletedTest.create!(user: current_user, test: TestsService.test)
+      TestsService.complete_test(current_user)
       redirect_to test_result_path(TestsService.test)
     else
       redirect_to question_show_path(TestsService.next_question)

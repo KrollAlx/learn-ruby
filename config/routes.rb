@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  get 'progress/show'
+  post 'progress/:test_id/details', to: 'progress#details', as: :progress_details
+  post 'progress/:test_id/hide', to: 'progress#hide', as: :progress_hide
+
   resources :tests do
     get 'start', to: 'tests#start', as: :start
     get 'result', to: 'tests#result', as: :result

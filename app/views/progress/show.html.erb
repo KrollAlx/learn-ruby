@@ -1,0 +1,18 @@
+<div class="text-center mt-4">
+  <h3>Пройденные тесты (пройдено <%= @completed_tests_count %> из <%= @test_count %>)</h3>
+</div>
+
+<div class="row row-cols-4">
+  <% @completed_tests.each do |completed_test| %>
+    <%= render partial: "completed_test", locals: { completed_test: completed_test } %>
+<!--    <div id="<%#= dom_id completed_test %>" class="col">-->
+<!--      <div class="card mt-4">-->
+<!--        <div class="card-body">-->
+<!--          <h4 class="card-title text-center"><%#= completed_test.title %></h4>-->
+<!--          <p class="card-text"><%#= completed_test.description %></p>-->
+          <%#= button_to "Подробнее", progress_details_path(completed_test), remote: true, class: "btn btn-danger text-black" %>
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+  <% end %>
+</div>

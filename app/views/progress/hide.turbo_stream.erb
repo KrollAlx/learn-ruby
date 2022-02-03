@@ -1,0 +1,3 @@
+<%= turbo_stream.replace dom_id(@completed_test) do %>
+  <%= render partial: "completed_test", locals: { completed_test: @completed_test } %>
+<% end %>

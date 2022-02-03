@@ -35,5 +35,11 @@ class TestsService
     def current_question_index
       @current_question_index + 1
     end
+
+    def complete_test(user)
+      CompletedTest.create!(user: user, test: @test,
+                            right_answers_count: @right_answers_count,
+                            questions_count: @count_questions)
+    end
   end
 end
