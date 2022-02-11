@@ -11,14 +11,15 @@ class TestsService
       @results = []
     end
 
-    def answer(answer)
+    def answer(answer_id)
+      user_answer = Answer.find(answer_id)
       question = @questions[@current_question_index]
 
-      if question.right_answer == answer
+      if question.right_answer.id == user_answer.id
         @right_answers_count += 1
-        @results.push({ answer: answer, result: 'правильный' })
+        @results.push({ answer: user_answer.text, result: 'правильный' })
       else
-        @results.push({ answer: answer, result: 'неправильный' })
+        @results.push({ answer: user_answer.text, result: 'неправильный' })
       end
 
       @current_question_index += 1

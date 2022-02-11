@@ -4,15 +4,19 @@ RSpec.describe TestsService do
   before(:each) do
     @test = Test.create(title: Faker::Book.title, description: Faker::Lorem.sentence(word_count: 3))
 
-    question = Question.create(text: Faker::Lorem.sentence(word_count: 5), right_answer: 0, test: @test)
-    question.answers.create(text: Faker::Lorem.word)
-    question.answers.create(text: Faker::Lorem.word)
-    question.answers.create(text: Faker::Lorem.word)
+    question = Question.create(text: Faker::Lorem.sentence(word_count: 5), test: @test)
+    right_answer = Answer.create(text: Faker::Lorem.word, question: question)
+    Answer.create(text: Faker::Lorem.word, question: question)
+    Answer.create(text: Faker::Lorem.word, question: question)
+    question.right_answer = right_answer
+    question.save!
 
-    question = Question.create(text: Faker::Lorem.sentence(word_count: 4), right_answer: 2, test: @test)
-    question.answers.create(text: Faker::Lorem.word)
-    question.answers.create(text: Faker::Lorem.word)
-    question.answers.create(text: Faker::Lorem.word)
+    question = Question.create(text: Faker::Lorem.sentence(word_count: 4), test: @test)
+    right_answer = Answer.create(text: Faker::Lorem.word, question: question)
+    Answer.create(text: Faker::Lorem.word, question: question)
+    Answer.create(text: Faker::Lorem.word, question: question)
+    question.right_answer = right_answer
+    question.save!
   end
 
   describe 'start test' do
@@ -31,7 +35,7 @@ RSpec.describe TestsService do
       TestsService.start_test(@test)
       current_question = @test.questions.first
       answer = current_question.right_answer
-      TestsService.answer(answer)
+      TestsService.answer(answer.id)
       expect(TestsService.test_completed?).to eq false
     end
 
@@ -39,27 +43,31 @@ RSpec.describe TestsService do
       TestsService.start_test(@test)
       current_question = @test.questions.first
       answer = current_question.right_answer
-      TestsService.answer(answer)
+      TestsService.answer(answer.id)
       next_question = @test.questions[1]
       expect(TestsService.next_question).to eq next_question
     end
 
     it 'test should be completed' do
+      answer_1 = @test.questions.first.answers.first
+      answer_2 = @test.questions[1].answers.first
       TestsService.start_test(@test)
-      TestsService.answer(0)
-      TestsService.answer(1)
+      TestsService.answer(answer_1.id)
+      TestsService.answer(answer_2.id)
       expect(TestsService.test_completed?).to eq true
     end
   end
 
   describe 'results' do
     it 'result should be correct' do
+      answer_1 = @test.questions.first.answers.first
+      answer_2 = @test.questions[1].answers[1]
       TestsService.start_test(@test)
-      TestsService.answer(0)
-      TestsService.answer(1)
+      TestsService.answer(answer_1.id)
+      TestsService.answer(answer_2.id)
       expected_results = [
-        { answer: 0, result: 'правильный' },
-        { answer: 1, result: 'неправильный' }
+        { answer: answer_1.text, result: 'правильный' },
+        { answer: answer_2.text, result: 'неправильный' }
       ]
       expect(TestsService.results).to eq expected_results
     end
