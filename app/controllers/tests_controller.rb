@@ -2,7 +2,7 @@ class TestsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @tests = Test.all
+    @categories = Category.all
   end
 
   def start

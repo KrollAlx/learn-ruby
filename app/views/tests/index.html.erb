@@ -1,18 +1,23 @@
 <div class="text-center mt-4">
-  <h3>Список доступных тестов</h3>
+  <h2>Список доступных тестов</h2>
 </div>
 
-<div class="row row-cols-4">
-  <% @tests.each do |test| %>
-    <div class="col">
-      <div class="card mt-4">
-        <div class="card-body">
-          <h4 class="card-title text-center"><%= test.title %></h4>
-          <p class="card-text"><%= test.description %></p>
-          <p class="card-text">Количество прохождений: <%= test.number_tries(current_user) %></p>
-          <%= link_to "Пройти тест", test_start_path(test), class: "btn btn-danger text-black" %>
+<div class="row">
+  <% @categories.each do |category| %>
+    <h3 class="text-center fst-italic mt-4"><%= category.title %></h3>
+    <div class="row row-cols-4">
+      <% category.tests.each do |test| %>
+        <div class="col">
+          <div class="card mt-4">
+            <div class="card-body">
+              <h4 class="card-title text-center"><%= test.title %></h4>
+              <p class="card-text"><%= test.description %></p>
+              <p class="card-text">Количество прохождений: <%= test.number_tries(current_user) %></p>
+              <%= link_to "Пройти тест", test_start_path(test), class: "btn btn-danger text-black" %>
+            </div>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   <% end %>
 </div>

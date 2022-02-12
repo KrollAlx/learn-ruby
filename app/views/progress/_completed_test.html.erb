@@ -2,7 +2,7 @@
   <div class="card mt-4">
     <div class="card-body">
       <h4 class="card-title text-center"><%= completed_test.title %></h4>
-      <p class="card-text"><%= completed_test.description %></p>
+      <p class="card-text">Категория: <%= completed_test.category.title.downcase %></p>
       <%= button_to "Подробнее", progress_details_path(completed_test), remote: true, class: "btn btn-danger text-black" %>
     </div>
   </div>
