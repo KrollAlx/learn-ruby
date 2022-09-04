@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :admins, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registration: 'users/registration',
+    passwords: 'users/passwords'
+  }
 
   get 'progress/show'
   post 'progress/:test_id/details', to: 'progress#details', as: :progress_details

@@ -4,6 +4,8 @@
     <h2 class="text-center">Авторизация</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%#= render "devise/shared/error_messages", resource: resource %>
+
       <div class="mb-3">
         <label class="form-label">Электронная почта</label> <br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>

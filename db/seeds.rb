@@ -39,12 +39,13 @@
 # question.answers.create(text: "var = 7; var.freeze")
 # question.answers.create(text: "define(X, 7)")
 
-c = Category.create(title: 'Для начинающих')
-test = Test.find(6)
-test.category = c
-test.save!
-
-c = Category.create(title: 'Средней сложности')
-test = Test.find(7)
-test.category = c
-test.save!
+# c = Category.create(title: 'Для начинающих')
+# test = Test.find(6)
+# test.category = c
+# test.save!
+#
+# c = Category.create(title: 'Средней сложности')
+# test = Test.find(7)
+# test.category = c
+# test.save!
+# Admin.create!(email: 'admin@example.com', password: '000000', password_confirmation: '000000') if Rails.env.development?
