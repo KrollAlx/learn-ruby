@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     passwords: 'users/passwords'
   }
 
+  get 'rating/index'
+
   get 'progress/show'
   post 'progress/:test_id/details', to: 'progress#details', as: :progress_details
   post 'progress/:test_id/hide', to: 'progress#hide', as: :progress_hide

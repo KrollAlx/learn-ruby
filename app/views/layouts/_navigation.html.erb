@@ -8,10 +8,13 @@
   <li class="nav-item">
     <%= link_to "Прогресс", progress_show_path, class: "nav-link h3 text-black" %>
   </li>
+  <li class="nav-item">
+    <%= link_to "Рейтинг", rating_index_path, class: "nav-link h3 text-black" %>
+  </li>
 
   <% if user_signed_in? %>
     <li class="nav-item position-absolute top-0 end-0">
-      <%= link_to "Профиль", edit_user_registration_path, class: "nav-link h3 text-black" %>
+      <%= link_to "Профиль - " + current_user.email, edit_user_registration_path, class: "nav-link h3 text-black" %>
     </li>
   <% end %>
 </ul>

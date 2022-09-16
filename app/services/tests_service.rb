@@ -41,6 +41,8 @@ class TestsService
       CompletedTest.create!(user: user, test: @test,
                             right_answers_count: @right_answers_count,
                             questions_count: @count_questions)
+      user.rating += (@right_answers_count.to_f / @count_questions).round(2)
+      user.save!
     end
   end
 end

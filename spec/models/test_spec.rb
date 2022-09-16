@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe Test, type: :model do
   describe 'number_tries' do
     let!(:current_user) { User.create!(Faker::Internet.user('email', 'password')) }
-    let!(:current_test) { Test.create!(title: Faker::Book.title, description: Faker::Lorem.sentence(word_count: 3)) }
+    let!(:category) { Category.create!(title: 'Test category') }
+    let!(:current_test) { Test.create!(title: Faker::Book.title,
+                                       description: Faker::Lorem.sentence(word_count: 3),
+                                       category: category) }
 
     it 'the number_tries must be equal to the number of passes' do
       CompletedTest.create!(test: current_test, user: current_user)

@@ -5,7 +5,7 @@
         <h4 class="card-title text-center mb-4"><%= @test.title %></h4>
         <% @completed_tests_records.each do |record| %>
           <div class="card-text">
-            <p>Дата прохождения: <%= record.created_at %></p>
+            <p>Дата прохождения: <%= record.created_at.strftime('%d/%m/%Y') %></p>
             <p>Количество правильных ответов: <%= record.right_answers_count %> </p>
             <p>Количество вопросов: <%= record.questions_count %></p>
           </div>

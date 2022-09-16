@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe TestsService do
   before(:each) do
-    @test = Test.create(title: Faker::Book.title, description: Faker::Lorem.sentence(word_count: 3))
+    category = Category.create(title: Faker::Book.genre)
+    @test = Test.create(title: Faker::Book.title, description: Faker::Lorem.sentence(word_count: 3), category: category)
 
     question = Question.create(text: Faker::Lorem.sentence(word_count: 5), test: @test)
     right_answer = Answer.create(text: Faker::Lorem.word, question: question)
@@ -70,6 +71,20 @@ RSpec.describe TestsService do
         { answer: answer_2.text, result: 'неправильный' }
       ]
       expect(TestsService.results).to eq expected_results
+    end
+  end
+
+  describe 'rating' do
+    let!(:current_user) { User.create!(Faker::Internet.user('email', 'password')) }
+
+    it 'rating should be updated' do
+      answer_1 = @test.questions.first.answers.first
+      answer_2 = @test.questions[1].answers[1]
+      TestsService.start_test(@test)
+      TestsService.answer(answer_1.id)
+      TestsService.answer(answer_2.id)
+      TestsService.complete_test(current_user)
+      expect(current_user.rating).to eq 0.5
     end
   end
 end
