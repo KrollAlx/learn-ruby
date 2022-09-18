@@ -3,26 +3,31 @@ require 'rails_helper'
 RSpec.describe ProgressService do
   let!(:current_user) { User.create!(Faker::Internet.user('email', 'password')) }
   before(:each) do
-    @test = Test.create(title: Faker::Book.title, description: Faker::Lorem.sentence(word_count: 3))
+    category = Category.create(title: Faker::Book.genre)
+    @test = Test.create(title: Faker::Book.title, description: Faker::Lorem.sentence(word_count: 3), category: category)
 
-    question = Question.create(text: Faker::Lorem.sentence(word_count: 5), right_answer: 0, test: @test)
-    question.answers.create(text: Faker::Lorem.word)
-    question.answers.create(text: Faker::Lorem.word)
-    question.answers.create(text: Faker::Lorem.word)
+    question = Question.create(text: Faker::Lorem.sentence(word_count: 5), test: @test)
+    right_answer = Answer.create(text: Faker::Lorem.word, question: question)
+    Answer.create(text: Faker::Lorem.word, question: question)
+    Answer.create(text: Faker::Lorem.word, question: question)
+    question.right_answer = right_answer
+    question.save!
 
-    question = Question.create(text: Faker::Lorem.sentence(word_count: 4), right_answer: 2, test: @test)
-    question.answers.create(text: Faker::Lorem.word)
-    question.answers.create(text: Faker::Lorem.word)
-    question.answers.create(text: Faker::Lorem.word)
+    question = Question.create(text: Faker::Lorem.sentence(word_count: 4), test: @test)
+    right_answer = Answer.create(text: Faker::Lorem.word, question: question)
+    Answer.create(text: Faker::Lorem.word, question: question)
+    Answer.create(text: Faker::Lorem.word, question: question)
+    question.right_answer = right_answer
+    question.save!
 
     TestsService.start_test(@test)
-    TestsService.answer(0)
-    TestsService.answer(1)
+    TestsService.answer(TestsService.next_question.answers.first.id)
+    TestsService.answer(TestsService.next_question.answers.first.id)
     TestsService.complete_test(current_user)
 
     TestsService.start_test(@test)
-    TestsService.answer(0)
-    TestsService.answer(2)
+    TestsService.answer(TestsService.next_question.answers.first.id)
+    TestsService.answer(TestsService.next_question.answers.first.id)
     TestsService.complete_test(current_user)
   end
 
