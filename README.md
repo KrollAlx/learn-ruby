@@ -26,8 +26,8 @@
 
 ```
 docker compose build
-docker compose run learn_ruby_app db:create
-docker compose run learn_ruby_app db:seed
+docker compose run learn_ruby_app rails db:create
+docker compose run learn_ruby_app rails db:seed
 docker compose up
 ```
 
